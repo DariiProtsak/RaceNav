@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RaceNav — Розумна Навігація</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="env.js"></script>
+    
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+</head>
+<body>
+
+    <div id="panel">
+        <div class="panel-header">
+            <h3>📍 RaceNav</h3>
+            <button class="btn-icon" id="togglePanelBtn" onclick="togglePanel()" title="Згорнути">━</button>
+        </div>
+        
+        <div id="panelContent">
+            <div class="input-wrapper">
+                <div class="input-group">
+                    <input type="text" id="startInput" placeholder="Звідки (назва або клік)" autocomplete="off">
+                    <button class="btn-icon gps-btn" onclick="setStartToCurrentLocation()" title="Моя локація">⌖</button>
+                </div>
+                <ul id="startList" class="suggestions"></ul>
+            </div>
+
+            <div class="input-wrapper">
+                <input type="text" id="endInput" placeholder="Куди (ТРЦ, заклад, вулиця)" autocomplete="off">
+                <ul id="endList" class="suggestions"></ul>
+            </div>
+
+            <div id="historyContainer" style="display: none;">
+                <div class="history-title">🕒 Останні маршрути</div>
+                <div id="historyList" class="history-list"></div>
+            </div>
+            
+            <select id="aggressionMode">
+                <option value="1.0">Спокійний маршрут</option>
+                <option value="1.2">Баланс (допустимий гак)</option>
+                <option value="1.5" selected>Швидкий (уникати заторів)</option>
+            </select>
+
+            <button class="btn-primary" onclick="runValidationLoop()">Побудувати маршрут</button>
+            <button id="rotateBtn" class="btn-toggle" onclick="toggleAutoRotate()">Увімкнути 3D-режим</button>
+            
+            <div id="stats">Оберіть точки маршруту</div>
+            
+            <button id="analysisBtn" class="btn-outline" onclick="toggleAnalysis()">Деталі маршруту</button>
+            <div id="analysisDetails"></div>
+        </div>
+    </div>
+
+    <button id="simBtn" class="floating-sim-btn" onclick="toggleSimulation()">
+        <span class="sim-indicator"></span> Симуляція затору: Вимк.
+    </button>
+
+    <div id="map"></div>
+
+    <script src="js/map-core.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
