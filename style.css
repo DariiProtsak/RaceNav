@@ -12,13 +12,17 @@ body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "S
     top: 20px; left: 20px; 
     width: calc(100% - 80px); 
     max-width: 360px; 
-    border-radius: 16px; 
+    border-radius: 16px;
+    /* Фікс мобільного скролу — панель обмежена висотою екрану */
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 .panel-header h3 { margin: 0; font-size: 18px; color: #111; font-weight: 700; }
 
-#panelContent { display: flex; flex-direction: column; gap: 12px; transition: max-height 0.3s ease, opacity 0.3s ease; max-height: 800px; opacity: 1; }
+#panelContent { display: flex; flex-direction: column; gap: 12px; transition: max-height 0.3s ease, opacity 0.3s ease; max-height: 2000px; opacity: 1; }
 #panelContent.collapsed { max-height: 0; opacity: 0; overflow: hidden; margin: 0; gap: 0; }
 
 .input-wrapper { position: relative; width: 100%; }
@@ -63,7 +67,8 @@ button { padding: 14px; border: none; border-radius: 12px; cursor: pointer; font
 
 /* Статистика і аналітика */
 #stats { font-weight: 500; font-size: 14px; padding: 12px; border-radius: 12px; background: #f4f4f5; text-align: center; }
-#analysisDetails { display: none; font-size: 13px; margin-top: 10px; max-height: 200px; overflow-y: auto; }
+/* Деталі більше не скролляться окремо — скролиться вся панель */
+#analysisDetails { display: none; font-size: 13px; margin-top: 10px; }
 .log-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
 .log-label { color: #666; } .log-value { font-weight: 600; } .warning { color: #dc2626; }
 .log-section-title { font-weight: 700; font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 0.05em; padding: 10px 0 4px; }
