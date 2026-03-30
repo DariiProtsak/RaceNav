@@ -140,7 +140,7 @@ async function generateLocalBypasses(startCoord, endCoord, routeCoords, clusters
             if (avoidGeoJSON?.coordinates?.length > 0) {
                 body.options = { avoid_polygons: avoidGeoJSON };
             }
-            const resp = await fetch('https://corsproxy.io/?https://api.openrouteservice.org/v2/directions/driving-car/geojson', {
+            const resp = await fetch('/.netlify/functions/ors-proxy', {
                 method: 'POST',
                 headers: { 'Authorization': orsKey, 'Content-Type': 'application/json' },
                 body: JSON.stringify(body)
@@ -299,7 +299,7 @@ window.runValidationLoop = async function() {
             ? { type: "MultiPolygon", coordinates: badPolygonsArray }
             : null;
 
-        const orsUrl = 'https://corsproxy.io/?https://api.openrouteservice.org/v2/directions/driving-car/geojson';
+        const orsUrl = '/.netlify/functions/ors-proxy';
 
         // --- Запит до ORS з альтернативами ---
         let orsBody = {

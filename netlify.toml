@@ -1,6 +1,2 @@
-[[redirects]]
-  from = "/ors-api/*"
-  to = "https://api.openrouteservice.org/:splat"
-  status = 200
-  force = true
-  headers = {X-Forwarded-Host = "api.openrouteservice.org"}
+[build]
+  functions = "netlify/functions"
